@@ -1,0 +1,18 @@
+<div class="heroes-list-label">Heroes</div>
+<table class="table table-hover">
+    <tr>
+        <td>Hero Name</td>
+        <td>Age</td>
+        <td>Birth Day</td>
+        <td>Power</td>
+    </tr>
+       <tr *ngFor="let hero of heroes">
+        <!--td><a [routerLink]="['EditDomain', {id: domain._id}]" >{{domain.domainName}}</a></td-->
+        <td><a [routerLink]="['HeroDetails', {id: hero.id}]">{{hero.name}}</a></td>
+        <td>{{hero.age}}</td>
+        <td>{{hero.entered | customDate: "MM/dd/yyyy" }}</td>
+        <td>{{hero.power}}</td>
+    </tr>
+</table>
+
+
