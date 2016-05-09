@@ -4,7 +4,7 @@ import {HeroesComponent} from './heroes/heroes.component';
 import {HeroDetailsComponent} from './hero/hero-details.component';
 @Component({
     selector: 'cloud-app',
-    templateUrl: "../templates/main.html",
+    templateUrl: "templates/main.html",
 
     directives: [
         ROUTER_DIRECTIVES

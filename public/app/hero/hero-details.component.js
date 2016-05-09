@@ -30,12 +30,13 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                     this._heroDetailsService = _heroDetailsService;
                     this._routeParams = _routeParams;
                     this.title = 'Hero Details';
-                    this.errors = [];
+                    this.error = "";
                 }
                 ;
                 HeroDetailsComponent.prototype.ngOnInit = function () {
                     this.id = this._routeParams.get('id');
                     this.hero = this._heroDetailsService.getHeroDetails(this.id);
+                    this.deviceReady = isDeviceReady();
                 };
                 HeroDetailsComponent.prototype.getTitle = function () {
                     return this.title;
@@ -51,26 +52,26 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                             image.src = imageURI;
                         }
                         function onFail(message) {
-                            alert('Failed because: ' + message);
+                            this.error = message.toString();
                         }
                     }
                     catch (err) {
-                        this.errors.push(err.message);
-                        console.log(err.message);
+                        this.error = err.toString();
                     }
                 };
                 HeroDetailsComponent.prototype.onShowDevice = function () {
                     try {
-                        this.dev = device.version;
+                        this.dev = "Mobile version: " + device.version;
                     }
                     catch (err) {
-                        this.errors.push(err.message);
+                        alert('Failed because: ' + err);
+                        this.error = err.message;
                     }
                 };
                 HeroDetailsComponent = __decorate([
                     core_1.Component({
                         selector: 'hero-list',
-                        templateUrl: "../templates/hero-details.html",
+                        templateUrl: "templates/hero-details.html",
                         pipes: [custom_date_pipe_1.CustomDatePipe],
                         directives: [],
                         providers: [

@@ -6,7 +6,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
     selector: 'hero-list',
-    templateUrl: "../templates/heroes.html",
+    templateUrl: "templates/heroes.html",
 
     pipes: [CustomDatePipe],
 

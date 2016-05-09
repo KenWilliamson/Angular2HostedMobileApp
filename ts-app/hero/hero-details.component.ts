@@ -3,11 +3,12 @@ import {HeroDetailsService}   from './services/hero-details.service';
 import {Hero} from "../domain/hero";
 import { CustomDatePipe } from '../pipes/custom-date.pipe';
 import { RouteParams } from '@angular/router-deprecated';
+import { NgForm }    from '@angular/common';
 
 @Component({
     selector: 'hero-list',
-    templateUrl: "../templates/hero-details.html",
-        
+    templateUrl: "templates/hero-details.html",
+
     pipes: [CustomDatePipe],
 
     directives: [
@@ -24,8 +25,9 @@ export class HeroDetailsComponent implements OnInit {
     hero: Hero;
 
     id: Number;
-    errors = [];
-    dev:string;
+    error: string = "";
+    dev: string;
+    deviceReady: boolean;
 
     constructor(
         //private _router: Router,
@@ -36,6 +38,7 @@ export class HeroDetailsComponent implements OnInit {
     ngOnInit() {
         this.id = this._routeParams.get('id');
         this.hero = this._heroDetailsService.getHeroDetails(this.id);
+        this.deviceReady = isDeviceReady();
     }
 
     getTitle() {
@@ -43,7 +46,7 @@ export class HeroDetailsComponent implements OnInit {
     }
 
     onCameraClicked() {
-        //alert("clicked");
+        //alert("clicked");  
         try {
             navigator.camera.getPicture(onSuccess, onFail, {
                 quality: 50,
@@ -56,22 +59,22 @@ export class HeroDetailsComponent implements OnInit {
             }
 
             function onFail(message) {
-                alert('Failed because: ' + message);
+                //alert('Failed because: ' + message);
+                this.error = message.toString();
             }
         } catch (err) {
-            this.errors.push(err.message);
-            console.log(err.message);
+            this.error = err.toString();
+        }
+    }
+
+    onShowDevice() {
+        try {
+            this.dev = "Mobile version: " + device.version;
+        } catch (err) {
+            alert('Failed because: ' + err);
+            this.error = err.message;
         }
 
-    }
-    
-    onShowDevice(){
-        try{
-             this.dev = device.version;
-        }catch(err){
-            this.errors.push(err.message);
-        }
-       
     }
 }
 

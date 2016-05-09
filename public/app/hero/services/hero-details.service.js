@@ -1,4 +1,4 @@
-System.register(['@angular/core', '../../mock/heros.mock'], function(exports_1) {
+System.register(['@angular/core', '../../mock/heroes.mock'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,20 +8,20 @@ System.register(['@angular/core', '../../mock/heros.mock'], function(exports_1) 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, heros_mock_1;
+    var core_1, heroes_mock_1;
     var HeroDetailsService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (heros_mock_1_1) {
-                heros_mock_1 = heros_mock_1_1;
+            function (heroes_mock_1_1) {
+                heroes_mock_1 = heroes_mock_1_1;
             }],
         execute: function() {
             HeroDetailsService = (function () {
                 function HeroDetailsService() {
-                    this.heroes = heros_mock_1.HEROES;
+                    this.heroes = heroes_mock_1.HEROES;
                 }
                 HeroDetailsService.prototype.getHeroDetails = function (id) {
                     console.log("Id passed: " + id);

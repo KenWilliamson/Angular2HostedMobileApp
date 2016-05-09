@@ -40,7 +40,7 @@ System.register(['@angular/core', './services/heroes.service', '../pipes/custom-
                 HeroesComponent = __decorate([
                     core_1.Component({
                         selector: 'hero-list',
-                        templateUrl: "../templates/heroes.html",
+                        templateUrl: "templates/heroes.html",
                         pipes: [custom_date_pipe_1.CustomDatePipe],
                         directives: [
                             router_deprecated_1.ROUTER_DIRECTIVES

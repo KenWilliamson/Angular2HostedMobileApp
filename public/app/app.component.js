@@ -36,7 +36,7 @@ System.register(['@angular/core', '@angular/router-deprecated', './heroes/heroes
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'cloud-app',
-                        templateUrl: "../templates/main.html",
+                        templateUrl: "templates/main.html",
                         directives: [
                             router_deprecated_1.ROUTER_DIRECTIVES
                         ],
