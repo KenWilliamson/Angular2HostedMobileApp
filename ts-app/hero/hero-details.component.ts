@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {HeroDetailsService}   from './services/hero-details.service';
 import {Hero} from "../domain/hero";
 import { CustomDatePipe } from '../pipes/custom-date.pipe';
@@ -25,14 +25,18 @@ export class HeroDetailsComponent implements OnInit {
     hero: Hero;
 
     id: Number;
-    error: string = "";
+    
+    //@Input() addItemStream:Observable<any>;
+    error: string;
+    
     dev: string;
     deviceReady: boolean;
 
     constructor(
         //private _router: Router,
         private _heroDetailsService: HeroDetailsService,
-        private _routeParams: RouteParams
+        private _routeParams: RouteParams,
+        private _cd: ChangeDetectorRef
     ) { };
 
     ngOnInit() {
@@ -48,6 +52,8 @@ export class HeroDetailsComponent implements OnInit {
     onCameraClicked() {
         //alert("clicked");  
         try {
+            let that = this;
+            that._cd.markForCheck();
             navigator.camera.getPicture(onSuccess, onFail, {
                 quality: 50,
                 destinationType: Camera.DestinationType.FILE_URI
@@ -60,7 +66,8 @@ export class HeroDetailsComponent implements OnInit {
 
             function onFail(message) {
                 //alert('Failed because: ' + message);
-                this.error = message.toString();
+                that.error = message.toString();
+                that._cd.detectChanges();
             }
         } catch (err) {
             this.error = err.toString();

@@ -26,11 +26,11 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
             }],
         execute: function() {
             HeroDetailsComponent = (function () {
-                function HeroDetailsComponent(_heroDetailsService, _routeParams) {
+                function HeroDetailsComponent(_heroDetailsService, _routeParams, _cd) {
                     this._heroDetailsService = _heroDetailsService;
                     this._routeParams = _routeParams;
+                    this._cd = _cd;
                     this.title = 'Hero Details';
-                    this.error = "";
                 }
                 ;
                 HeroDetailsComponent.prototype.ngOnInit = function () {
@@ -43,6 +43,8 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                 };
                 HeroDetailsComponent.prototype.onCameraClicked = function () {
                     try {
+                        var that = this;
+                        that._cd.markForCheck();
                         navigator.camera.getPicture(onSuccess, onFail, {
                             quality: 50,
                             destinationType: Camera.DestinationType.FILE_URI
@@ -52,7 +54,8 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                             image.src = imageURI;
                         }
                         function onFail(message) {
-                            this.error = message.toString();
+                            that.error = message.toString();
+                            that._cd.detectChanges();
                         }
                     }
                     catch (err) {
@@ -78,7 +81,7 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                             hero_details_service_1.HeroDetailsService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [hero_details_service_1.HeroDetailsService, router_deprecated_1.RouteParams])
+                    __metadata('design:paramtypes', [hero_details_service_1.HeroDetailsService, router_deprecated_1.RouteParams, core_1.ChangeDetectorRef])
                 ], HeroDetailsComponent);
                 return HeroDetailsComponent;
             })();
