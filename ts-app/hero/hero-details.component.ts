@@ -42,7 +42,15 @@ export class HeroDetailsComponent implements OnInit {
     ngOnInit() {
         this.id = this._routeParams.get('id');
         this.hero = this._heroDetailsService.getHeroDetails(this.id);
-        this.deviceReady = true;//isDeviceReady();
+        try {
+            if (device) {
+                this.deviceReady = true;
+            }
+        } catch (err) {
+            
+        }
+
+
     }
 
     getTitle() {
@@ -85,7 +93,7 @@ export class HeroDetailsComponent implements OnInit {
 
     onShowDevice() {
         try {
-            this.dev = "Mobile version: " + device.version;           
+            this.dev = "Mobile version: " + device.version;
         } catch (err) {
             alert('Failed because: ' + err);
             this.error = err.message;

@@ -36,7 +36,13 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                 HeroDetailsComponent.prototype.ngOnInit = function () {
                     this.id = this._routeParams.get('id');
                     this.hero = this._heroDetailsService.getHeroDetails(this.id);
-                    this.deviceReady = true;
+                    try {
+                        if (device) {
+                            this.deviceReady = true;
+                        }
+                    }
+                    catch (err) {
+                    }
                 };
                 HeroDetailsComponent.prototype.getTitle = function () {
                     return this.title;
