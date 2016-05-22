@@ -14,7 +14,11 @@ The HeroDetailsComponent makes calls to Cordova plugins as a way to test functio
 The Device and Camera plugins are used.
 
 ## Create a Mobile App
-All that is needed to turn this app into a mobile all is to host it somewhere and build a wrapper with the 
+All that is needed to turn this appliation into a mobile application is to host it somewhere and build a wrapper with the 
 HostedCordovaApp (https://github.com/KenWilliamson/HostedCordovaApp.git) project.
 Configure the HostedCordovaApp wrapper to point to where this application is hosted. 
 See HostedCordovaApp for more details.
+
+
+
+
