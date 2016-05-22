@@ -4,17 +4,19 @@
     <head>
         <title>CloudMobile</title>
         <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+      
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--css -->
         <link rel="stylesheet" href="css/styles.css">
 
-       <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+        <link href="css/libs/bootstrap.min.css" rel="stylesheet">
 
         <!-- js -->
         <script src="js/libs/jquery-2.2.3.min.js"></script>
         <script src="js/libs/bootstrap.min.js"></script>  
         <script src="js/device.js"></script>     
-                 
+
         <script src="node_modules/es6-shim/es6-shim.js"></script>
 
         <script src="node_modules/zone.js/dist/zone.js"></script>
@@ -24,24 +26,33 @@
         <!-- 2. Configure SystemJS -->
         <script src="systemjs.config.js"></script>
         
+        
+
+
+
         <!-- 2. Configure SystemJS -->
         <script>
             /*
-            System.config({
-                transpiler: 'typescript',
-                typescriptOptions: {emitDecoratorMetadata: true},
-                packages: {'app': {defaultExtension: 'js'}}
+             System.config({
+             transpiler: 'typescript',
+             typescriptOptions: {emitDecoratorMetadata: true},
+             packages: {'app': {defaultExtension: 'js'}}
+             });
+             System.import('app/main')
+             .then(null, console.error.bind(console));
+             */
+
+            System.import('app').catch(function (err) {
+                console.error(err);
             });
-            System.import('app/main')
-                    .then(null, console.error.bind(console));
-            */
-            System.import('app').catch(function(err){ console.error(err);  });
         </script>
 
 
     </head>
-    
+
     <body>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
     <cloud-app class="container" style="display: block">Loading .....</cloud-app>
 </body>
 </html>

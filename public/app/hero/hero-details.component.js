@@ -36,7 +36,7 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                 HeroDetailsComponent.prototype.ngOnInit = function () {
                     this.id = this._routeParams.get('id');
                     this.hero = this._heroDetailsService.getHeroDetails(this.id);
-                    this.deviceReady = isDeviceReady();
+                    this.deviceReady = true;
                 };
                 HeroDetailsComponent.prototype.getTitle = function () {
                     return this.title;
@@ -45,18 +45,16 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                     try {
                         var that = this;
                         that._cd.markForCheck();
-                        navigator.camera.getPicture(onSuccess, onFail, {
+                        navigator.camera.getPicture(function (imageURI) {
+                            var image = document.getElementById('myImage');
+                            image.src = imageURI;
+                        }, function (message) {
+                            that.error = message.toString();
+                            that._cd.detectChanges();
+                        }, {
                             quality: 50,
                             destinationType: Camera.DestinationType.FILE_URI
                         });
-                        function onSuccess(imageURI) {
-                            var image = document.getElementById('myImage');
-                            image.src = imageURI;
-                        }
-                        function onFail(message) {
-                            that.error = message.toString();
-                            that._cd.detectChanges();
-                        }
                     }
                     catch (err) {
                         this.error = err.toString();

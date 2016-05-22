@@ -25,10 +25,10 @@ export class HeroDetailsComponent implements OnInit {
     hero: Hero;
 
     id: Number;
-    
+
     //@Input() addItemStream:Observable<any>;
     error: string;
-    
+
     dev: string;
     deviceReady: boolean;
 
@@ -42,7 +42,7 @@ export class HeroDetailsComponent implements OnInit {
     ngOnInit() {
         this.id = this._routeParams.get('id');
         this.hero = this._heroDetailsService.getHeroDetails(this.id);
-        this.deviceReady = isDeviceReady();
+        this.deviceReady = true;//isDeviceReady();
     }
 
     getTitle() {
@@ -54,21 +54,30 @@ export class HeroDetailsComponent implements OnInit {
         try {
             let that = this;
             that._cd.markForCheck();
-            navigator.camera.getPicture(onSuccess, onFail, {
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI
-            });
+            navigator.camera.getPicture(
+                function(imageURI) {
+                    var image = document.getElementById('myImage');
+                    image.src = imageURI;
+                }, function(message) {
+                    //alert('Failed because: ' + message);
+                    that.error = message.toString();
+                    that._cd.detectChanges();
+                }, {
+                    quality: 50,
+                    destinationType: Camera.DestinationType.FILE_URI
+                });
+            /*
+        function onSuccess(imageURI) {
+            var image = document.getElementById('myImage');
+            image.src = imageURI;
+        }
 
-            function onSuccess(imageURI) {
-                var image = document.getElementById('myImage');
-                image.src = imageURI;
-            }
-
-            function onFail(message) {
-                //alert('Failed because: ' + message);
-                that.error = message.toString();
-                that._cd.detectChanges();
-            }
+        function onFail(message) {
+            //alert('Failed because: ' + message);
+            that.error = message.toString();
+            that._cd.detectChanges();
+        }
+        */
         } catch (err) {
             this.error = err.toString();
         }
@@ -76,7 +85,7 @@ export class HeroDetailsComponent implements OnInit {
 
     onShowDevice() {
         try {
-            this.dev = "Mobile version: " + device.version;
+            this.dev = "Mobile version: " + device.version;           
         } catch (err) {
             alert('Failed because: ' + err);
             this.error = err.message;
