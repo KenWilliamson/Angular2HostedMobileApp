@@ -2,12 +2,12 @@
     <div><b>Hero Name</b>: {{hero.name}}</div>
     <div><b>Hero Age</b>: {{hero.age}}</div>
     <div><b>Hero Birthday</b>: {{hero.entered | customDate: "MM/dd/yyyy" }}</div>
-    <div><b>Hero Power</b>: {{hero.power}}</div>
+    <div><b>Hero Power</b>: {{hero.power}}</div>    
     <div *ngIf="deviceReady">
         <br>
         <div> <b>Take the Hero's Picture</b>: <span (click)="onCameraClicked()" class="glyphicon glyphicon-camera"></span></div>
         <div> <b>Your device</b>: <span (click)="onShowDevice()" class="glyphicon glyphicon-camera"></span></div>
-
+        
         <div>{{error}}</div>
 
         <div>{{dev}}</div>

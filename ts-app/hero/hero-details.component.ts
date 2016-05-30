@@ -31,6 +31,7 @@ export class HeroDetailsComponent implements OnInit {
 
     dev: string;
     deviceReady: boolean;
+    plat: boolean;
 
     constructor(
         //private _router: Router,
@@ -42,12 +43,21 @@ export class HeroDetailsComponent implements OnInit {
     ngOnInit() {
         this.id = this._routeParams.get('id');
         this.hero = this._heroDetailsService.getHeroDetails(this.id);
-        try {
+        
+        try {            
             if (device) {
                 this.deviceReady = true;
             }
         } catch (err) {
-            
+          
+        }
+        
+        try {            
+            if (NSDevice) {
+                this.deviceReady = true;
+            }
+        } catch (err) {
+          
         }
 
 
@@ -93,7 +103,8 @@ export class HeroDetailsComponent implements OnInit {
 
     onShowDevice() {
         try {
-            this.dev = "Mobile version: " + device.version;
+            //this.dev = "Mobile version: " + device.version;
+            this.dev = "Mobile version: " + NSDevice.getModel();
         } catch (err) {
             alert('Failed because: ' + err);
             this.error = err.message;

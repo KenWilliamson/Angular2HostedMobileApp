@@ -43,6 +43,13 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                     }
                     catch (err) {
                     }
+                    try {
+                        if (NSDevice) {
+                            this.deviceReady = true;
+                        }
+                    }
+                    catch (err) {
+                    }
                 };
                 HeroDetailsComponent.prototype.getTitle = function () {
                     return this.title;
@@ -68,7 +75,7 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                 };
                 HeroDetailsComponent.prototype.onShowDevice = function () {
                     try {
-                        this.dev = "Mobile version: " + device.version;
+                        this.dev = "Mobile version: " + NSDevice.getModel();
                     }
                     catch (err) {
                         alert('Failed because: ' + err);
