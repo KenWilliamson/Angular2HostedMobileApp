@@ -82,6 +82,14 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                         this.error = err.message;
                     }
                 };
+                HeroDetailsComponent.prototype.showToast = function () {
+                    try {
+                        var toast = Toast.makeText("Toast is working in a hosted world.");
+                        toast.show();
+                    }
+                    catch (err) {
+                    }
+                };
                 HeroDetailsComponent = __decorate([
                     core_1.Component({
                         selector: 'hero-list',

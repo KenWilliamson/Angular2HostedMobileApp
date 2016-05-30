@@ -43,21 +43,21 @@ export class HeroDetailsComponent implements OnInit {
     ngOnInit() {
         this.id = this._routeParams.get('id');
         this.hero = this._heroDetailsService.getHeroDetails(this.id);
-        
-        try {            
+
+        try {
             if (device) {
                 this.deviceReady = true;
             }
         } catch (err) {
-          
+
         }
-        
-        try {            
+
+        try {
             if (NSDevice) {
                 this.deviceReady = true;
             }
         } catch (err) {
-          
+
         }
 
 
@@ -108,6 +108,16 @@ export class HeroDetailsComponent implements OnInit {
         } catch (err) {
             alert('Failed because: ' + err);
             this.error = err.message;
+        }
+
+    }
+
+    showToast() {
+        try {
+            var toast = Toast.makeText("Toast is working in a hosted world.");
+            toast.show();
+        } catch (err) {
+
         }
 
     }
