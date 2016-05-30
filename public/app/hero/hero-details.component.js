@@ -84,8 +84,7 @@ System.register(['@angular/core', './services/hero-details.service', '../pipes/c
                 };
                 HeroDetailsComponent.prototype.showToast = function () {
                     try {
-                        var toast = Toast.makeText("Toast is working in a hosted world.");
-                        toast.show();
+                        HostedToast.showToast("Toast is working in a hosted world.");
                     }
                     catch (err) {
                     }

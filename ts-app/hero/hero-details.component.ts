@@ -114,8 +114,7 @@ export class HeroDetailsComponent implements OnInit {
 
     showToast() {
         try {
-            var toast = Toast.makeText("Toast is working in a hosted world.");
-            toast.show();
+            HostedToast.showToast("Toast is working in a hosted world.");            
         } catch (err) {
 
         }
